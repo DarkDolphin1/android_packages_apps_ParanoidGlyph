@@ -35,7 +35,8 @@
         android:persistent="true"
         android:defaultToDeviceProtectedStorage="true"
         android:enableOnBackInvokedCallback="true"
-        android:directBootAware="true">
+        android:directBootAware="true"
+        android:theme="@style/Theme.SubSettingsBase.Expressive">
 
         <receiver
             android:name=".BootCompletedReceiver"
@@ -146,8 +147,7 @@
             android:name=".Settings.SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
-            android:label="@string/glyph_settings_title"
-            android:theme="@style/Theme.SubSettingsBase.Expressive">
+            android:label="@string/glyph_settings_title">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
@@ -171,8 +171,7 @@
         <activity
             android:name=".Settings.CallSettingsActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:theme="@style/Theme.SubSettingsBase.Expressive">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -181,8 +180,7 @@
         <activity
             android:name=".Settings.NotifsSettingsActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:theme="@style/Theme.SubSettingsBase.Expressive">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -191,8 +189,7 @@
         <activity
             android:name=".Settings.ScheduleSettingsActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:theme="@style/Theme.SubSettingsBase.Expressive">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -201,8 +198,7 @@
         <activity
             android:name=".Settings.ScheduleSettingsActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:theme="@style/Theme.SubSettingsBase.Expressive">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
