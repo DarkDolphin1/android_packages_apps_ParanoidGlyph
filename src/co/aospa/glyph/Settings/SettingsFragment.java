@@ -24,6 +24,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -143,16 +144,28 @@ public class SettingsFragment extends SettingsBasePreferenceFragment implements 
         mCallPreference.setOnPreferenceChangeListener(this);
 
         mChargingLevelPreference = (SwitchPreferenceCompat) findPreference(Constants.GLYPH_CHARGING_LEVEL_ENABLE);
-        mChargingLevelPreference.setEnabled(glyphEnabled);
-        mChargingLevelPreference.setOnPreferenceChangeListener(this);
-
         mChargingPowersharePreference = (SwitchPreferenceCompat) findPreference(Constants.GLYPH_CHARGING_POWERSHARE_ENABLE);
 
-        if (Constants.isPowershareSupported()) {
-           mChargingPowersharePreference.setEnabled(glyphEnabled);
-           mChargingPowersharePreference.setOnPreferenceChangeListener(this);
+        if (Constants.isChargingLevelSupported()) {
+            mChargingLevelPreference.setEnabled(glyphEnabled);
+            mChargingLevelPreference.setOnPreferenceChangeListener(this);
+
+            if (Constants.isPowershareSupported()) {
+                mChargingPowersharePreference.setEnabled(glyphEnabled);
+                mChargingPowersharePreference.setOnPreferenceChangeListener(this);
+            } else {
+                mChargingPowersharePreference.setDefaultValue(false);
+                mChargingPowersharePreference.setVisible(false);
+            }
         } else {
-           mChargingPowersharePreference.setVisible(false);
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+
+            editor.putBoolean(Constants.GLYPH_CHARGING_LEVEL_ENABLE, false);
+            editor.putBoolean(Constants.GLYPH_CHARGING_POWERSHARE_ENABLE, false);
+            editor.apply();
+
+            mChargingLevelPreference.setVisible(false);
+            mChargingPowersharePreference.setVisible(false);
         }
 
         mVolumeLevelPreference = (SwitchPreferenceCompat) findPreference(Constants.GLYPH_VOLUME_LEVEL_ENABLE);

@@ -86,6 +86,10 @@ public final class Constants {
         return device;
     }
 
+    public static boolean isChargingLevelSupported() {
+        return ResourceUtils.getInteger("glyph_settings_battery_levels_num") > 0;
+    }
+
     public static boolean isPowershareSupported() {
        return !ResourceUtils.getString("glyph_settings_paths_powershare_active_absolute").isEmpty();
     }

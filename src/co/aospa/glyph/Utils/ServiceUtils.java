@@ -218,12 +218,12 @@ public final class ServiceUtils {
         }
 
         if (glyphEnabled) {
-            if (SettingsManager.isGlyphChargingEnabled()) {
+            if (SettingsManager.isGlyphChargingEnabled() && Constants.isChargingLevelSupported()) {
                 startChargingService();
             } else {
                 stopChargingService();
             }
-            if (Constants.isPowershareSupported()) {
+            if (Constants.isChargingLevelSupported() && Constants.isPowershareSupported()) {
                 if (SettingsManager.isGlyphPowershareEnabled()) {
                     startPowershareService();
                 } else {
