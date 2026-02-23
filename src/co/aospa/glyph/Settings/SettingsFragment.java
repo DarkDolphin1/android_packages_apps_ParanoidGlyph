@@ -143,6 +143,8 @@ public class SettingsFragment extends SettingsBasePreferenceFragment implements 
         mCallPreference.setSwitchEnabled(glyphEnabled);
         mCallPreference.setOnPreferenceChangeListener(this);
 
+        PreferenceCategory chargingCategory = (PreferenceCategory) findPreference(Constants.GLYPH_CHARGING_CATEGORY);
+
         mChargingLevelPreference = (SwitchPreferenceCompat) findPreference(Constants.GLYPH_CHARGING_LEVEL_ENABLE);
         mChargingPowersharePreference = (SwitchPreferenceCompat) findPreference(Constants.GLYPH_CHARGING_POWERSHARE_ENABLE);
 
@@ -158,8 +160,11 @@ public class SettingsFragment extends SettingsBasePreferenceFragment implements 
                 mChargingPowersharePreference.setVisible(false);
             }
         } else {
-            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+            if (chargingCategory != null) {
+                chargingCategory.setVisible(false);
+            }
 
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
             editor.putBoolean(Constants.GLYPH_CHARGING_LEVEL_ENABLE, false);
             editor.putBoolean(Constants.GLYPH_CHARGING_POWERSHARE_ENABLE, false);
             editor.apply();
